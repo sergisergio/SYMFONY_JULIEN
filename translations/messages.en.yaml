@@ -1,0 +1,276 @@
+base:
+
+  title: 'Welcome!'
+
+  header:
+    nav:
+      home: 'Julien Vollé'
+      link_1: 
+        label: 'Routes'
+        sublink_1:
+          label: 'Response'
+        sublink_2:
+          label: 'VarDumper'
+        sublink_3:
+          label: 'YAML'
+        sublink_4:
+          label: 'Annotation'
+        sublink_5:
+          label: 'Request & Method'
+      link_2: 
+        label: 'Twig'
+        sublink_1:
+          label: 'Extends, Render & Syntax'
+        sublink_2:
+          label: 'Parent & Include'
+      link_3: 
+        label: 'Doctrine & Entity'
+        sublink_1:
+          label: '<kbd>findAll()</kbd> || <kbd>recupTous()</kbd>'
+        sublink_2:
+          label: '<kbd>findBetweenDate()</kbd>'
+        sublink_3:
+          label: '<kbd>findByDate()</kbd>'
+        sublink_4:
+          label: '<kbd>findFirstDate()</kbd> and <kbd>findLastDate()</kbd>'
+        sublink_5:
+          label: '<kbd>findByMonth()</kbd>'
+      link_4: 
+        label: 'Movies Admin'
+      link_5: 
+        label: 'Ads Platform'
+
+  footer:
+    baseline: 'Formation Symfony & Angular'
+    powerBy: 'Power by'
+
+platform:
+
+  title: 'Ads Platform'
+
+  nav:
+    menu: 
+      label: 'FrontEnd'
+      link_1: 'Available Ads'
+    admin: 
+      label: 'BackEnd'
+      link_1: 'Adverts'
+      link_2: 'Applications'
+      link_3: 'Skills'
+    translate: 
+      label: 'Translate'
+      link_1: 'English'
+      link_2: 'French'
+
+  home:
+    title: 'Ads available'
+    result:
+      author_by: 'By'
+      date_at: 'at'
+      empty: 'No ads.'
+    button:
+      prev: 'Previous'
+      next: 'Next'
+      apply: 'Apply at this ad'
+      close: 'Close'
+      submit: 'Submit'
+    form:
+      title: 'Your apply'
+
+  advert:
+
+    list:
+      title: 'Adverts'
+      button:
+        insert: 'Insert'
+        show: 'Show'
+        update: 'Update'
+        delete: 'Delete'
+      table:
+        thead:
+          id: 'ID'
+          date: 'DATE'
+          title: 'TITLE'
+          published: 'PUBLISHED'
+          applications: 'APPLICATIONS'
+          skills: 'SKILLS'
+          actions: 'ACTIONS'
+        tbody:
+          id: '#%id%'
+          published:
+            yes: 'yes'
+            no: 'no'
+      result:
+        empty: 'Nothing.'
+
+    show:
+      title: 'Show Advert #%id%'
+      label:
+        date: 'Date'
+        title: 'Title'
+        content: 'Content'
+        author: 'Author'
+        published: 'Published'
+        skills: 'Skills'
+        applications: 'Applications'
+      result:
+        published:
+          yes: 'yes'
+          no: 'no'
+        skill:
+          empty: 'No skill required.'
+      button:
+        show: 'Show Application(s)'
+        back: 'Back'
+
+    insert:
+      title: 'Add Advert'
+
+    update:
+      title: 'Update Advert #%id%'
+
+    form:
+      field:
+        title: 'Title'
+        author: 'Author'
+        content: 'Content'
+        published: 'Published'
+        skills: 'Skills'
+      button:
+        skills:
+          add: 'Add Skill'
+          remove: 'Delete Skill'
+        submit: 'Submit'
+        back: 'Back'
+
+  advert_skill:
+
+    form:
+      field:
+        skill: 'Skill'
+        level: 'Level'
+        level_choice:
+          label_1: 1
+          label_2: 2
+          label_3: 3
+          label_4: 4
+          label_5: 5
+
+  image:
+
+    form:
+      field:
+        url: 'Image URL'
+        url_help: 'Ex: http://lorempixel.com/200/200/people/1'
+        alt: 'Image ALT'
+
+  application:
+
+    list:
+      title: 'Applications'
+      title_to: 'for'
+      title_to_advert: 'Advert #%id%'
+      button:
+        insert: 'Insert'
+        filter: 
+          add: 'Add filter'
+          remove: 'Remove filter on Advert #%id%'
+        show: 'Show'
+        update: 'Update'
+        delete: 'Delete'
+      table:
+        thead:
+          id: 'ID'
+          author: 'AUTHOR'
+          content: 'CONTENT'
+          submitted_to: 'SUBMITTED TO'
+          actions: 'ACTIONS'
+        tbody:
+          id: '#%id%'
+          submitted_to: 'Advert #%id%'
+      result:
+        empty: 'Nothing.'
+
+    show:
+      title: 'Show Application #%application_id%'
+      title_to: 'for'
+      title_to_advert: 'Advert #%advert_id%'
+      label:
+        author: 'Author'
+        content: 'Content'
+        submitted_to: 'Submitted to'
+      result:
+        advert:
+          title: 'Advert #%id%'
+        skill:
+          empty: 'No skill required.'
+        badge: 
+          level: 'Level Required'
+      button:
+        back: 'Back'
+
+    insert:
+      title: 'Add Application'
+      title_to: 'for'
+      title_to_advert: 'advert #%id%'
+
+    update:
+      title: 'Update Application #%application_id%'
+      title_to: 'for'
+      title_to_advert: 'advert #%advert_id%'
+
+    form:
+      field:
+        author: 'Author'
+        content: 'Content'
+        advert: 'Advert'
+      button:
+        submit: 'Submit'
+        back: 'Back'
+
+  skill:
+
+    list:
+      title: 'Skills'
+      table:
+        thead:
+          id: 'ID'
+          name: 'NAME'
+          linked: 'ADVERTS LINKED'
+          actions: 'ACTIONS'
+        tbody:
+          id: '#%id%'
+      result:
+        empty: 'Nothing.'
+      button:
+        insert: 'Insert'
+        show: 'Show'
+        update: 'Update'
+        delete: 'Delete'
+
+    show:
+      title: 'Show Skill #%id%'
+      label:
+        name: 'Name'
+        linked: 'Ads linked'
+      result:
+        empty: 'Nothing.'
+        advert:
+          title: 'Advert #%id%'
+        badge: 
+          level: 'Level Required'
+      button:
+        back: 'Back'
+
+    insert:
+      title: 'Add Skill'
+
+    update:
+      title: 'Update Skill #%id%'
+
+    form:
+      field:
+        name: 'Name'
+      button:
+        submit: 'Submit'
+        back: 'Back'

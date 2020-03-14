@@ -1,0 +1,57 @@
+{% extends 'application/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans %} platform.application.list.title {% endtrans %} {% if advert is defined %}<small class="text-muted">{% trans %} platform.application.list.title_to {% endtrans %} <a href="{{ path('advert_show', {'advert_id': advert.id}) }}" target="_self">{% trans with {'%id%': advert.id} %} platform.application.list.title_to_advert {% endtrans %}</a></small>{% endif %}</h2>
+
+    {% if advert is defined %}
+    <p class="my-3">
+        <button type="button" class="btn btn-sm btn-success" onclick="javascript:window.open('{{ path('application_insert_by_advert', {'advert_id': advert.id}) }}','_self');">{% trans %} platform.application.list.button.insert {% endtrans %}</button>
+        <button type="button" class="btn btn-sm btn-info" onclick="javascript:window.open('{{ path('application_list') }}','_self');">{% trans with {'%id%': advert.id} %} platform.application.list.button.filter.remove {% endtrans %}</button>
+    </p>
+    {% else %}
+    <p class="my-3">
+        <button type="button" class="btn btn-sm btn-success" onclick="javascript:window.open('{{ path('application_insert') }}','_self');">{% trans %} platform.application.list.button.insert {% endtrans %}</button>
+    </p>
+    {% endif %}
+
+    <table class="table table-striped table-bordered table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">{% trans %} platform.application.list.table.thead.id {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.application.list.table.thead.author {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.application.list.table.thead.content {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.application.list.table.thead.submitted_to {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.application.list.table.thead.actions {% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <th scope="col">{% trans with {'%id%': application.id} %} platform.application.list.table.tbody.id {% endtrans %}</th>
+                <td>{{ application.author }}</td>
+                <td>{{ application.content|slice(0,50) }}...</td>
+                {% if advert is not defined %}
+                <td>{% trans with {'%id%': application.advert.id} %} platform.application.list.table.tbody.submitted_to {% endtrans %} <a href="{{ path('application_list_by_advert', {'advert_id': application.advert.id}) }}" target="_self" class="badge badge-info badge-pill ml-2">{% trans %} platform.application.list.button.filter.add {% endtrans %}</a></td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="javascript:window.open('{{ path('application_show', {'application_id': application.id}) }}','_self');">{% trans %} platform.application.list.button.show {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:window.open('{{ path('application_update', {'application_id': application.id}) }}','_self');">{% trans %} platform.application.list.button.update {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:window.open('{{ path('application_delete', {'application_id': application.id}) }}','_self');">{% trans %} platform.application.list.button.delete {% endtrans %}</button>
+                </td>
+                {% else %}
+                <td>{% trans with {'%id%': application.advert.id} %} platform.application.list.table.tbody.submitted_to {% endtrans %}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="javascript:window.open('{{ path('application_show_by_advert', {'advert_id': advert.id, 'application_id': application.id}) }}','_self');">{% trans %} platform.application.list.button.show {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:window.open('{{ path('application_update_by_advert', {'advert_id': advert.id, 'application_id': application.id}) }}','_self');">{% trans %} platform.application.list.button.update {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:window.open('{{ path('application_delete_by_advert', {'advert_id': advert.id, 'application_id': application.id}) }}','_self');">{% trans %} platform.application.list.button.delete {% endtrans %}</button>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            {% if applications is empty %}
+            <tr><td colspan="5">{% trans %} platform.application.list.result.empty {% endtrans %}</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+    
+{% endblock %}

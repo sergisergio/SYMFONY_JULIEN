@@ -1,0 +1,9 @@
+{% extends 'skill/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans with {'%id%': app.request.get('skill_id')} %} platform.skill.update.title {% endtrans %}</h2>
+
+    {% include 'skill/form.html.twig' %}
+    
+{% endblock %}

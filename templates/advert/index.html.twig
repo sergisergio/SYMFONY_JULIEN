@@ -1,0 +1,33 @@
+{% extends 'bundle.html.twig' %}
+
+{% block lang %}fr{% endblock %}
+
+{% block title %}{% trans %} platform.title {% endtrans %}{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="/libs/fontawesome/css/all.min.css">
+<style type="text/css">
+.img-thumbnail.w100 { max-width: 100px !important; }
+.img-thumbnail.w50  { max-width: 50px !important; }
+</style>
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid py-5">
+        <div class="row">
+            <div class="col">
+
+                <h1 class="border-bottom mb-5 pb-3">{% trans %} platform.title {% endtrans %}</h1>
+
+                <div class="row">
+                    <div class="col">{% include "advert/nav.html.twig" %}</div>
+                    <div class="col-10">{% block content %}{% endblock %}</div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

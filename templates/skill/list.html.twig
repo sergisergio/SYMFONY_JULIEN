@@ -1,0 +1,39 @@
+{% extends 'skill/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans %} platform.skill.list.title {% endtrans %}</h2>
+
+    <p class="my-3">
+        <button type="button" class="btn btn-sm btn-success" onclick="javascript:window.open('{{ path('skill_insert') }}','_self');">{% trans %} platform.skill.list.button.insert {% endtrans %}</button>
+    </p>
+
+    <table class="table table-striped table-bordered table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">{% trans %} platform.skill.list.table.thead.id {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.skill.list.table.thead.name {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.skill.list.table.thead.linked {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.skill.list.table.thead.actions {% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skill in skills %}
+            <tr>
+                <th scope="col">{% trans with {'%id%': skill.id} %} platform.skill.list.table.tbody.id {% endtrans %}</th>
+                <td>{{ skill.name }}</td>
+                <td><span class="badge badge-{% if skill.adverts|length > 0 %}info{% else %}secondary{% endif %} badge-pill">{{ skill.adverts|length }}</span></td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="javascript:window.open('{{ path('skill_show', {'skill_id': skill.id}) }}','_self');">{% trans %} platform.skill.list.button.show {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:window.open('{{ path('skill_update', {'skill_id': skill.id}) }}','_self');">{% trans %} platform.skill.list.button.update {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:window.open('{{ path('skill_delete', {'skill_id': skill.id}) }}','_self');">{% trans %} platform.skill.list.button.delete {% endtrans %}</button>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if skills is empty %}
+            <tr><td colspan="4">{% trans %} platform.skill.list.result.empty {% endtrans %}</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+    
+{% endblock %}

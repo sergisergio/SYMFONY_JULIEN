@@ -1,0 +1,27 @@
+<div class="alert alert-secondary" role="alert">
+    <p>Include render of &laquo; <strong>App\Controller\DefaultController::data &rarr; data.html.twig</strong> &raquo;</p>
+    <table class="table table-sm table-striped table-bordered table-hover table-light">
+        <tbody>
+            <tr>
+                <th scope="col">Contact</th>
+                <td>{% if twig_base_contact is defined %}{{ twig_base_contact }}{% else %}?{% endif %}</td>
+            </tr>
+            <tr >
+                <th scope="col">Offre</th>
+                <td>{% if twig_base_offre is defined %}{{ twig_base_offre }}{% else %}?{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="col">Demande</th>
+                <td>{% if twig_base_demande is defined %}{{ twig_base_demande }}{% else %}?{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="col">Favori</th>
+                <td>{% if twig_base_favori is defined %}{{ twig_base_favori }}{% else %}?{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="col">Boutique</th>
+                <td>{% if twig_base_boutique is defined %}{{ twig_base_boutique }}{% else %}?{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

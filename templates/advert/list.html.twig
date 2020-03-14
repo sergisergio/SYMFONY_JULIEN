@@ -1,0 +1,51 @@
+{% extends 'advert/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans %} platform.advert.list.title {% endtrans %}</h2>
+
+    <p class="my-3">
+        <button type="button" class="btn btn-sm btn-success" onclick="javascript:window.open('{{ path('advert_insert') }}','_self');">{% trans %} platform.advert.list.button.insert {% endtrans %}</button> 
+    </p>
+
+    <table class="table table-striped table-bordered table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.id {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.date {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.title {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.published {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.applications {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.skills {% endtrans %}</th>
+                <th scope="col">{% trans %} platform.advert.list.table.thead.actions {% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for advert in adverts %}
+            <tr>
+                <th scope="col">{% trans with {'%id%': advert.id} %} platform.advert.list.table.tbody.id {% endtrans %}</th>
+                <td>{{ advert.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ advert.title }}</td>
+                <td>
+                    {% if advert.published %}
+                    <span class="badge badge-success">{% trans %} platform.advert.list.table.tbody.published.yes {% endtrans %}</span>
+                    {% else %}
+                    <span class="badge badge-danger">{% trans %} platform.advert.list.table.tbody.published.no {% endtrans %}</span>
+                    {% endif %}
+                </td>
+                <td><span class="badge badge-{% if advert.applications|length > 0 %}info{% else %}secondary{% endif %} badge-pill">{{ advert.applications|length }}</span></td>
+                <td><span class="badge badge-{% if advert.skills|length > 0 %}info{% else %}secondary{% endif %} badge-pill">{{ advert.skills|length }}</span></td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="javascript:window.open('{{ path('advert_show', {'advert_id': advert.id}) }}','_self');">{% trans %} platform.advert.list.button.show {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-warning" onclick="javascript:window.open('{{ path('advert_update', {'advert_id': advert.id}) }}','_self');">{% trans %} platform.advert.list.button.update {% endtrans %}</button>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="javascript:window.open('{{ path('advert_delete', {'advert_id': advert.id}) }}','_self');">{% trans %} platform.advert.list.button.delete {% endtrans %}</button>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if adverts is empty %}
+            <tr><td colspan="7">{% trans %} platform.advert.list.result.empty {% endtrans %}</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+    
+{% endblock %}

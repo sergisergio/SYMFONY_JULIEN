@@ -1,0 +1,276 @@
+base:
+
+  title: 'Bienvenu !'
+
+  header:
+    nav:
+      home: 'Julien Vollé'
+      link_1: 
+        label: 'Routes'
+        sublink_1:
+          label: 'Réponse'
+        sublink_2:
+          label: 'Débuggage'
+        sublink_3:
+          label: 'YAML'
+        sublink_4:
+          label: 'Annotation'
+        sublink_5:
+          label: 'Requète & Méthode'
+      link_2: 
+        label: 'Twig'
+        sublink_1:
+          label: 'Héritage, Rendu & Syntaxe'
+        sublink_2:
+          label: 'Héritage & Inclusion'
+      link_3: 
+        label: 'Doctrine & Entité'
+        sublink_1:
+          label: '<kbd>findAll()</kbd> || <kbd>recupTous()</kbd>'
+        sublink_2:
+          label: '<kbd>findBetweenDate()</kbd>'
+        sublink_3:
+          label: '<kbd>findByDate()</kbd>'
+        sublink_4:
+          label: '<kbd>findFirstDate()</kbd> et <kbd>findLastDate()</kbd>'
+        sublink_5:
+          label: '<kbd>findByMonth()</kbd>'
+      link_4: 
+        label: 'Gestion de films'
+      link_5: 
+        label: "Plateforme d'annonces"
+
+  footer:
+    baseline: 'Formation Symfony & Angular'
+    powerBy: 'Produit par'
+
+platform:
+
+  title: "Plateforme d'annonces"
+
+  nav:
+    menu: 
+      label: 'Site'
+      link_1: 'Liste des annonces'
+    admin: 
+      label: 'Administration'
+      link_1: 'Annonces'
+      link_2: 'Candidatures'
+      link_3: 'Compétences'
+    translate: 
+      label: 'Traduction'
+      link_1: 'Anglais'
+      link_2: 'Français'
+
+  home:
+    title: 'Annonces disponibles'
+    result:
+      author_by: 'Par'
+      date_at: 'le'
+      empty: 'Aucune annonce.'
+    button:
+      prev: 'Précédent'
+      next: 'Suivant'
+      apply: 'Postuler à cette annonce'
+      close: 'Fermer'
+      submit: 'Valider'
+    form:
+      title: 'Votre candidature'
+
+  advert:
+
+    list:
+      title: 'Annonces'
+      button:
+        insert: 'Ajouter'
+        show: 'Voir'
+        update: 'Modifier'
+        delete: 'Supprimer'
+      table:
+        thead:
+          id: 'ID'
+          date: 'DATE'
+          title: 'TITRE'
+          published: 'PUBLIQUE'
+          applications: 'CANDIDATURES'
+          skills: 'COMPÉTENCES'
+          actions: 'ACTIONS'
+        tbody:
+          id: '#%id%'
+          published:
+            yes: 'oui'
+            no: 'non'
+      result:
+        empty: 'Aucune annonce.'
+
+    show:
+      title: "Détail de l'annonce n°%id%"
+      label:
+        date: 'Date'
+        title: 'Titre'
+        content: 'Contenu'
+        author: 'Auteur'
+        published: 'Publique'
+        skills: 'Compétences'
+        applications: 'Candidatures'
+      result:
+        published:
+          yes: 'oui'
+          no: 'non'
+        skill:
+          empty: 'Aucune compétence requise.'
+      button:
+        show: 'Voir les candidatures'
+        back: 'Retour'
+
+    insert:
+      title: 'Ajouter une annonce'
+
+    update:
+      title: "Modifier l'annonce n°%id%"
+
+    form:
+      field:
+        title: 'Titre'
+        author: 'Auteur'
+        content: 'Contenu'
+        published: 'Publique'
+        skills: 'Compétences'
+      button:
+        skills:
+          add: 'Ajouter une compétence'
+          remove: 'Supprimer cette compétence'
+        submit: 'Valider'
+        back: 'Retour'
+
+  advert_skill:
+
+    form:
+      field:
+        skill: 'Compétence'
+        level: 'Niveau'
+        level_choice:
+          label_1: 1
+          label_2: 2
+          label_3: 3
+          label_4: 4
+          label_5: 5
+
+  image:
+
+    form:
+      field:
+        url: 'Image URL'
+        url_help: 'Ex: http://lorempixel.com/200/200/people/1'
+        alt: 'Image ALT'
+
+  application:
+
+    list:
+      title: 'Candidatures'
+      title_to: 'pour'
+      title_to_advert: "l'annonce n°%id%"
+      button:
+        insert: 'Ajouter'
+        filter: 
+          add: 'Ajouter un filtre'
+          remove: "Supprimer le filtre sur l'annonce n°%id%"
+        show: 'Voir'
+        update: 'Modifier'
+        delete: 'Supprimer'
+      table:
+        thead:
+          id: 'ID'
+          author: 'AUTEUR'
+          content: 'CONTENU'
+          submitted_to: 'POSTULE À'
+          actions: 'ACTIONS'
+        tbody:
+          id: '#%id%'
+          submitted_to: 'Annnoce n°%id%'
+      result:
+        empty: 'Aucune candidature.'
+
+    show:
+      title: 'Détails de la candidature n°%application_id%'
+      title_to: 'pour'
+      title_to_advert: "l'annonce n°%advert_id%"
+      label:
+        author: 'Auteur'
+        content: 'Contenu'
+        submitted_to: 'Postule à'
+      result:
+        advert:
+          title: 'Annonce n°%id%'
+        skill:
+          empty: 'Aucune compétence requise.'
+        badge: 
+          level: 'Niveau requis'
+      button:
+        back: 'Retour'
+
+    insert:
+      title: 'Ajouter une candidature'
+      title_to: 'pour'
+      title_to_advert: "l'annonce n°%advert_id%"
+
+    update:
+      title: 'Modifier la candidature n°%application_id%'
+      title_to: 'pour'
+      title_to_advert: "l'annonce n°%advert_id%"
+
+    form:
+      field:
+        author: 'Auteur'
+        content: 'Contenu'
+        advert: 'Annonce'
+      button:
+        submit: 'Valider'
+        back: 'Retour'
+
+  skill:
+
+    list:
+      title: 'Compétences'
+      table:
+        thead:
+          id: 'ID'
+          name: 'NOM'
+          linked: 'ANNONCES ASSOCIÉES'
+          actions: 'ACTIONS'
+        tbody:
+          id: '#%id%'
+      result:
+        empty: 'Aucune compétence.'
+      button:
+        insert: 'Ajouter'
+        show: 'Voir'
+        update: 'Modifier'
+        delete: 'Supprimer'
+
+    show:
+      title: 'Détails de la compétence n°%id%'
+      label:
+        name: 'Nom'
+        linked: 'Annonces associées'
+      result:
+        empty: 'Aucune annonce.'
+        advert:
+          title: 'Annonce n°%id%'
+        badge: 
+          level: 'Niveau requis'
+      button:
+        back: 'Retour'
+
+    insert:
+      title: 'Ajouter une compétence'
+
+    update:
+      title: 'Modifier la comptétence n°%id%'
+
+    form:
+      field:
+        name: 'Nom'
+      button:
+        submit: 'Valider'
+        back: 'Retour'

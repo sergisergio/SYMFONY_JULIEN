@@ -1,0 +1,43 @@
+{% extends 'application/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans with {'%application_id%': application.id} %} platform.application.show.title {% endtrans %} {% if advert is defined %}<small class="text-muted">{% trans %} platform.application.show.title_to {% endtrans %} <a href="{{ path('advert_show', {'advert_id': advert.id}) }}" target="_self">{% trans with {'%advert_id%': advert.id} %} platform.application.show.title_to_advert {% endtrans %}</a></small>{% endif %}</h2>
+
+    <p><strong>{% trans %} platform.application.show.label.author {% endtrans %}</strong>: {{ application.author }}</p>
+    <p><strong>{% trans %} platform.application.show.label.content {% endtrans %}</strong>: {{ application.content }}</p>
+    <p><strong>{% trans %} platform.application.show.label.submitted_to {% endtrans %}</strong>: </p>
+    <ul class="list-group m-0">
+        <li class="list-group-item">
+            <h5><a href="{{ path('advert_show', {'advert_id': application.advert.id}) }}" target="_self">{% trans with {'%id%': application.advert.id} %} platform.application.show.result.advert.title {% endtrans %}</a></h5>
+            <p class="m-0"><strong>{{ application.advert.title }}</strong></p>
+            <p class="m-0">{{ application.advert.content|slice(0,100) }} ...</p>
+            <p class="m-0 text-muted"><small>{{ application.advert.author }}</small></p>
+            <hr class="my-2">
+            <p class="m-0">
+                {% if application.advert.skills is empty %}
+                <span class="badge badge-dark">{% trans %} platform.application.show.result.skill.empty {% endtrans %}</span>
+                {% else %}
+                    {% for skill in application.advert.skills %}
+                    <span class="badge badge-dark badge-pill mr-3">{% trans %} platform.application.show.result.badge.level {% endtrans %}</span>
+                        {% for i in 0..4 %}
+                            {% if skill.level > i %}
+                            <i class="fas fa-star" style="color:green;"></i>
+                            {% else %}
+                            <i class="far fa-star" style="color:grey;"></i>
+                            {% endif %}
+                        {% endfor %} &nbsp; {{ skill.skill.name }}<br>
+                    {% endfor %}
+                {% endif %}
+            </p>
+        </li>
+    </ul>
+    <p class="my-3">
+        {% if advert is defined %}
+        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:window.open('{{ path('application_list_by_advert', {'advert_id': advert.id}) }}','_self');">{% trans %} platform.application.show.button.back {% endtrans %}</button> 
+        {% else %}
+        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:window.open('{{ path('application_list') }}','_self');">{% trans %} platform.application.show.button.back {% endtrans %}</button> 
+        {% endif %}
+    </p>
+    
+{% endblock %}

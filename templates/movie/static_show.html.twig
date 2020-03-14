@@ -1,0 +1,35 @@
+{% extends "bundle.html.twig" %}
+
+{% block lang %}fr{% endblock %}
+
+{% block title %}Static Movie | Show{% endblock %}
+
+{% block main %}
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+
+                <h1 class="border-bottom mb-5 pb-3">Static Movie Show</h1>
+
+                <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:window.open('{{ path('movie_static_list') }}','_self');">Back to List</button>
+
+                <h2 class="my-3">Movie #{{ app.request.get('id') }}</h2>
+
+                <div class="mt-3">
+                    <b>Title:</b> {{ movie['title'] }} <br>
+                    <b>Date:</b> {{ movie['date']|date('Y-m-d') }} <br>
+                    <b>Director:</b> {{ movie['director'] }} <br>
+                    <b>Cast:</b>
+                    <ul>
+                    {% for cast in movie['cast'] %}
+                        <li>{{ cast }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

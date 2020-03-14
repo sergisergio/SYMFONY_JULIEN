@@ -1,0 +1,21 @@
+{% if form is rootform %}
+{{ form_start(form) }}
+{% endif %}
+    
+<div class="form-group">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+{% if form.submit is defined %}
+<div class="form-group">
+    {{ form_widget(form.submit, {'label': 'platform.skill.form.button.submit', 'attr': {'class': 'btn-sm btn-success'}}) }}
+    {% if form.back is defined %}
+    {{ form_widget(form.back, {'label': 'platform.skill.form.button.back', 'attr': {'class': 'btn-sm btn-secondary'}}) }}
+    {% endif %}
+</div>
+{% endif %}
+
+{% if form is rootform %}
+{{ form_end(form, {'render_rest': false}) }}
+{% endif %}

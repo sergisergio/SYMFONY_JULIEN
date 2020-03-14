@@ -1,0 +1,121 @@
+{% extends "bundle.html.twig" %}
+
+{% block lang %}fr{% endblock %}
+
+{% block title %}Symfony | Twig{% endblock %}
+
+{% block main %}
+
+    {{ parent() }} {# Récupère le contenu parent du block "main" #}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-primary" role="alert">Template &laquo; <strong>page1.html.twig</strong> &raquo;</div>
+            </div>
+            <div class="col">
+                <div class="alert alert-info" role="alert">Extends of &laquo; <strong>bundle.html.twig</strong> &raquo;</div>
+            </div>
+            <div class="col">
+                <div class="alert alert-success" role="alert">Use &laquo; <strong>parent()</strong> &raquo;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+
+                <h1 class="border-bottom mb-5 pb-3">Symfony | Twig</h1>
+                
+                <p>
+                    <ul class="list-group">
+                        {% for member in members %}
+                        <li class="list-group-item">
+                            <h4>#{{ loop.index0 }} &rarr; {{ member.name }} ({{ member.age }} years old)</h4>
+                            {% if member.age > 18 %}
+                                <h5><span class="text-success">- Can watch all movies !</span></h5>
+                            {% elseif member.age < 18 and member.age > 12 %}
+                                <h5><span class="text-danger">- Don't watch movies</span> <span class="badge badge-danger">PEGI+18</span></h5>
+                                <h5><span class="text-success">- Can watch movies</span> <span class="badge badge-warning">PEGI+12</span></h5>
+                                <h5><span class="text-success">- Can watch movies</span> <span class="badge badge-info">PEGI+7</span></h5>
+                            {% else %}
+                                <h5><span class="text-danger">- Don't watch movies</span> <span class="badge badge-danger">PEGI+18</span></h5>
+                                <h5><span class="text-danger">- Don't watch movies</span> <span class="badge badge-warning">PEGI+12</span></h5>
+                                <h5><span class="text-success">- Can watch movies</span> <span class="badge badge-info">PEGI+7</span></h5>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </p>
+                
+                <hr class="my-5">
+
+                <p>
+                    <table class="table table-striped table-bordered table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">EVENT</th>
+                                <th scope="col">DATE</th>
+                                <th scope="col">CITY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for event in events %}
+                            <tr>
+                                <td>{{ event }}</td>
+                                <td>Le {{ dates[loop.index0]|date("d/m/Y") }} à {{ dates[loop.index0]|date("H:i") }}</td>
+                                <td>{{ citys[loop.index0] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </p>
+                
+                <hr class="my-5">
+
+                <p>
+                    <form>
+                        <select class="form-control">
+                            {% for event in events %}
+                            <option>{{ loop.index }} - {{ event }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </p>
+                
+                <hr class="my-5">
+
+                <p>
+                    {% set tab = [] %}
+                    {% for member in members %}
+                        {% if loop.index0 is divisible by(2) %}
+                            {% set tab = tab|merge([member]) %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ dump(tab) }}
+                </p>
+                
+                <hr class="my-5">
+
+                <h2>{{ helloworld|myFilter|raw }}</h2>
+                
+                <hr class="my-5">
+
+                <h2>
+                    {% set ARRAY_NUMBER = [1,2,3,4,5] %}
+
+                    {% set a = constant('App\\Controller\\TwigController::CONST_NUMBER') %}
+                    {% set b = ARRAY_NUMBER[3] %}
+                    {% set c = GLOBAL_NUMBER %}
+
+                    {% set a = 10 %}
+                    
+                    ruleOfThree({{ a }}, {{ b }}, {{ c }}) = <b>{{ ruleOfThree(a, b, c) }}</b>
+                </h2>
+            
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

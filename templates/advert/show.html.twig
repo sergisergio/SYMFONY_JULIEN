@@ -1,0 +1,37 @@
+{% extends 'advert/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans with {'%id%': advert.id} %} platform.advert.show.title {% endtrans %}</h2>
+
+    <p><img class="img-thumbnail w100" src="{{ advert.image.url }}" alt="{{ advert.image.alt }}"></p>
+    <p><strong>{% trans %} platform.advert.show.label.date {% endtrans %}</strong>: {{ advert.date|date('Y-m-d H:i:s') }}</p>
+    <p><strong>{% trans %} platform.advert.show.label.title {% endtrans %}</strong>: {{ advert.title }}</p>
+    <p><strong>{% trans %} platform.advert.show.label.content {% endtrans %}</strong>: {{ advert.content }}</p>
+    <p><strong>{% trans %} platform.advert.show.label.author {% endtrans %}</strong>: {{ advert.author }}</p>
+    <p><strong>{% trans %} platform.advert.show.label.published {% endtrans %}</strong>: {% if advert.published %}<span class="badge badge-success">{% trans %} platform.advert.show.result.published.yes {% endtrans %}</span>{% else %}<span class="badge badge-danger">{% trans %} platform.advert.show.result.published.no {% endtrans %}</span>{% endif %}</p>
+    <p><strong>{% trans %} platform.advert.show.label.skills {% endtrans %}</strong>:
+        {% if advert.skills is empty %}
+        <span class="badge badge-secondary">{% trans %} platform.advert.show.result.skills.empty {% endtrans %}</span>
+        {% else %}
+        <ul class="list-group">
+            {% for skill in advert.skills %}
+            <li class="list-group-item">
+                {% for i in 0..4 %}
+                    {% if skill.level > i %}
+                    <i class="fas fa-star" style="color:green;"></i>
+                    {% else %}
+                    <i class="far fa-star" style="color:grey;"></i>
+                    {% endif %}
+                {% endfor %} &nbsp; {{ skill.skill.name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </p>
+    <p><strong>{% trans %} platform.advert.show.label.applications {% endtrans %}</strong>: <span class="badge badge-{% if advert.applications|length > 0 %}info{% else %}secondary{% endif %} badge-pill">{{ advert.applications|length }}</span></p>
+    <p class="my-3">
+        <button type="button" class="btn btn-sm btn-primary" onclick="javascript:window.open('{{ path('application_list_by_advert', {'advert_id': advert.id}) }}','_self');">{% trans %} platform.advert.show.button.show {% endtrans %}</button> 
+        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:window.open('{{ path('advert_list') }}','_self');">{% trans %} platform.advert.show.button.back {% endtrans %}</button> 
+    </p>
+
+{% endblock %}

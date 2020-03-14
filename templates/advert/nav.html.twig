@@ -1,0 +1,34 @@
+<div class="list-group">
+    <span class="list-group-item list-group-item-dark bg-dark text-white" aria-disabled="true"><strong><i class="fas fa-desktop"></i> &nbsp; {% trans %} platform.nav.menu.label {% endtrans %}</strong></span>
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if app.request.get('_route') == 'index_advert' %}active{% endif %}" href="{{ path('index_advert') }}" target="_self">
+        {% trans %} platform.nav.menu.link_1 {% endtrans %}
+        {% set nbAdvertsPublished = render(controller('App\\Controller\\AdvertController::countPublished')) %}
+        <span class="badge badge-{% if nbAdvertsPublished > 0 %}dark{% else %}secondary{% endif %} badge-pill">{{ nbAdvertsPublished }}</span>
+    </a>
+    <span class="list-group-item list-group-item-dark bg-dark text-white" aria-disabled="true"><strong><i class="fas fa-tools"></i> &nbsp; {% trans %} platform.nav.admin.label {% endtrans %}</strong></span>
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if 'advert_' in app.request.get('_route') %}active{% endif %}" href="{{ path('advert_list') }}" target="_self">
+        {% trans %} platform.nav.admin.link_1 {% endtrans %} 
+        {% set nbAdverts = render(controller('App\\Controller\\AdvertController::count')) %}
+        <span class="badge badge-{% if nbAdverts > 0 %}dark{% else %}secondary{% endif %} badge-pill">{{ nbAdverts }}</span>
+    </a>
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if 'application_' in app.request.get('_route') %}active{% endif %}" href="{{ path('application_list') }}" target="_self">
+        {% trans %} platform.nav.admin.link_2 {% endtrans %} 
+        {% set nbApplications = render(controller('App\\Controller\\ApplicationController::count')) %}
+        <span class="badge badge-{% if nbApplications > 0 %}dark{% else %}secondary{% endif %} badge-pill">{{ nbApplications }}</span>
+    </a>
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if 'skill_' in app.request.get('_route') %}active{% endif %}" href="{{ path('skill_list') }}" target="_self">
+        {% trans %} platform.nav.admin.link_3 {% endtrans %} 
+        {% set nbSkills = render(controller('App\\Controller\\SkillController::count')) %}
+        <span class="badge badge-{% if nbSkills > 0 %}dark{% else %}secondary{% endif %} badge-pill">{{ nbSkills }}</span>
+    </a>
+    <span class="list-group-item list-group-item-dark bg-dark text-white" aria-disabled="true"><strong><i class="fas fa-globe"></i> &nbsp; {% trans %} platform.nav.translate.label {% endtrans %}</strong></span>
+    {% set route = app.request.attributes.get('_route') %}
+    {% set route_params = app.request.attributes.get('_route_params') %}
+    {% set params = route_params|merge(app.request.query.all) %}
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if app.request.getLocale() == 'en' %}active{% endif %}" href="{{ path(route, params|merge({ _locale: 'en' })) }}" target="_self">
+        {% trans %} platform.nav.translate.link_1 {% endtrans %} 
+    </a>
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if app.request.getLocale() == 'fr' %}active{% endif %}" href="{{ path(route, params|merge({ _locale: 'fr' })) }}" target="_self">
+        {% trans %} platform.nav.translate.link_2 {% endtrans %} 
+    </a>
+</div>

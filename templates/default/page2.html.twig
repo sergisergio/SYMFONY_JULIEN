@@ -1,0 +1,40 @@
+{% extends "bundle.html.twig" %}
+
+{% block lang %}fr{% endblock %}
+
+{% block title %}Symfony | Twig{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-primary" role="alert">Template &laquo; <strong>page2.html.twig</strong> &raquo;</div>
+            </div>
+            <div class="col">
+                <div class="alert alert-info" role="alert">Extends of &laquo; <strong>bundle.html.twig</strong> &raquo;</div>
+            </div>
+            <div class="col">
+                <div class="alert alert-danger" role="alert">Don't use &laquo; <strong>parent()</strong> &raquo;</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-secondary" role="alert">Include template &laquo; <strong>on_est_la.html.twig</strong> &raquo;</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+
+                <h1 class="border-bottom mb-5 pb-3">Symfony | Twig</h1>
+
+                {% include "default/on_est_la.html.twig" %}
+            
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

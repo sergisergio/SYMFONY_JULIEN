@@ -1,0 +1,9 @@
+{% extends 'application/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans with {'%application_id%': application.id} %} platform.application.update.title {% endtrans %} {% if advert is defined %}<small class="text-muted">{% trans %} platform.application.update.title_to {% endtrans %} <a href="{{ path('advert_show', {'advert_id': advert.id}) }}" target="_self">{% trans with {'%advert_id%': advert.id} %} platform.application.update.title_to_advert {% endtrans %}</a></small>{% endif %}</h2>
+
+    {% include 'application/form.html.twig' %}
+    
+{% endblock %}

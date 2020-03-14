@@ -1,0 +1,135 @@
+{% extends 'advert/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans %} platform.home.title {% endtrans %}</h2>
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success alert-dismissible fade show py-3" role="alert">
+        {{ message|raw }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    {% endfor %}
+
+    {# {% set modulo = all % limit %}
+    {% set rest = all - modulo %}
+    {% set nb_page = (rest / limit) + 1 %}
+    {% if adverts|length > 0 %}
+    <nav class="mb-3" aria-label="Pagination">
+        <ul class="pagination">
+            {% if page > 1 %}<li class="page-item"><a class="page-link" href="{{ path('index_advert', {'page': (page - 1)}) }}">{% trans %} platform.home.button.prev {% endtrans %}</a></li>{% endif %}
+            {% for i in 1..nb_page %}
+            <li class="page-item {% if page == i %}active{% endif %}"><a class="page-link" href="{{ path('index_advert', {'page': i}) }}">{{ i }}</a></li>
+            {% endfor %}
+            {% if page < nb_page %}<li class="page-item"><a class="page-link" href="{{ path('index_advert', {'page': (page + 1)}) }}">{% trans %} platform.home.button.next {% endtrans %}</a></li>{% endif %}
+        </ul>
+    </nav>
+    {% endif %} #}
+    {{ knp_pagination_render(adverts, 'advert/pagination.html.twig') }}
+
+    <ul class="list-group mb-3">
+        {% for advert in adverts %}
+        <li class="list-group-item py-3">
+            <div class="row">
+                <div class="col-auto">
+                    <p><img class="img-thumbnail w100" src="{{ advert.image.url }}" alt="{{ advert.image.alt }}"></p>
+                </div>
+                <div class="col">
+                    <h3>{{ advert.title }}</h3>
+                    <p>{{ advert.content }}</p>
+                    <p class="text-muted"><small>{% trans %} platform.home.result.author_by {% endtrans %} {{ advert.author }}, {% trans %} platform.home.result.date_at {% endtrans %} {{ advert.date|date('Y-m-d H:i') }}</small></p>
+                    {% if advert.skills is not empty %}
+                    <ul class="list-group mb-4">
+                        {% for skill in advert.skills %}
+                        <li class="list-group-item">
+                            {% for i in 0..4 %}
+                                {% if skill.level > i %}
+                                <i class="fas fa-star" style="color:green;"></i>
+                                {% else %}
+                                <i class="far fa-star" style="color:grey;"></i>
+                                {% endif %}
+                            {% endfor %} &nbsp; {{ skill.skill.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <p class="m-0"><button type="button" class="btn btn-sm btn-info btn-modal" data-advert="{{ advert.id }}">{% trans %} platform.home.button.apply {% endtrans %}</button></p>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if adverts|length == 0 %}
+    <p class="text-muted">{% trans %} platform.home.result.empty {% endtrans %}</p>
+    {% endif %}
+
+    {# {% if adverts|length > 0 %}
+    <nav aria-label="Pagination">
+        <ul class="pagination">
+            {% if page > 1 %}<li class="page-item"><a class="page-link" href="{{ path('index_advert', {'page': (page - 1)}) }}">{% trans %} platform.home.button.prev {% endtrans %}</a></li>{% endif %}
+            {% for i in 1..nb_page %}
+            <li class="page-item {% if page == i %}active{% endif %}"><a class="page-link" href="{{ path('index_advert', {'page': i}) }}">{{ i }}</a></li>
+            {% endfor %}
+            {% if page < nb_page %}<li class="page-item"><a class="page-link" href="{{ path('index_advert', {'page': (page + 1)}) }}">{% trans %} platform.home.button.next {% endtrans %}</a></li>{% endif %}
+        </ul>
+    </nav>
+    {% endif %} #}
+    {{ knp_pagination_render(adverts, 'advert/pagination.html.twig') }}
+    
+{% endblock %}
+
+{% block footer %}
+
+    {{ parent() }}
+
+    <div class="modal fade" id="applicationForm" tabindex="-1" role="dialog" aria-labelledby="applicationLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applicationLabel">{% trans %} platform.home.form.title {% endtrans %}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(form) }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{ form_label(form.author) }}
+                        {{ form_widget(form.author, {'attr': {'class': 'form-control-sm'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.content) }}
+                        {{ form_widget(form.content, {'attr': {'class': 'form-control-sm'}}) }}
+                    </div>
+                    <div class="form-group d-none">
+                        {{ form_label(form.advert) }}
+                        {{ form_widget(form.advert, {'attr': {'class': 'form-control-sm'}}) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">{% trans %} platform.home.button.close {% endtrans %}</button>
+                    {% if form.submit is defined %}{{ form_widget(form.submit, {'label': 'platform.home.button.submit', 'attr': {'class': 'btn-sm btn-success'}}) }}{% endif %}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript">
+    $(function(){
+        $('.btn-modal').click(function(){
+            var advertSelected = $(this).attr('data-advert');
+            $('#application_advert').val(advertSelected);
+            $('#applicationForm').modal();
+        });
+        {% if not form.vars.valid %}$('#applicationForm').modal();{% endif %}
+    });
+    </script>
+
+{% endblock %}

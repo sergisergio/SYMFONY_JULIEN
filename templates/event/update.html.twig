@@ -1,0 +1,67 @@
+{% extends "bundle.html.twig" %}
+
+{% block lang %}fr{% endblock %}
+
+{% block title %}Symfony | Entity{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="/libs/jquery-ui/css/jquery-ui.css">
+{% endblock %}
+
+{% block main %}
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+
+                <h1 class="border-bottom mb-5 pb-3">Symfony | Entity</h1>
+                
+                <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:window.open('{{ path('event_show', {'id': event.id}) }}','_self');">Back</button>
+
+                <h2 class="my-3">Event #{{ event.id }}</h2>
+
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control form-control-sm" id="name" name="name" value="{{ event.name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price (€)</label>
+                        <input type="number" step="0.01" class="form-control form-control-sm" id="price" name="price" value="{{ event.price }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="text" class="form-control form-control-sm datepicker" id="date" name="date" value="{{ event.date|date('Y-m-d') }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea rows="5" class="form-control form-control-sm" id="description" name="description">{{ event.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control form-control-sm" id="location" name="location" value="{{ event.location }}">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-sm btn-success">Save</button>
+                    </div>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="/libs/jquery/jquery-1.12.4.js"></script>
+<script src="/libs/jquery-ui/js/jquery-ui.js"></script>
+<script type="text/javascript">
+$(function(){
+    $(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+});
+</script>
+{% endblock %}

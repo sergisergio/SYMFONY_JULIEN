@@ -1,0 +1,21 @@
+{% if form is rootform %}
+{{ form_start(form) }}
+{% endif %}
+
+{% if vars is defined %}{% if vars == 'prototype' %}<fieldset id="advert_skills___name__">{% endif %}{% endif %}
+
+<div class="form-group">
+    {{ form_label(form.skill) }}
+    {{ form_widget(form.skill, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.level) }}
+    {{ form_widget(form.level, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+{% if vars is defined %}{% if vars == 'prototype' %}</fieldset>{% endif %}{% endif %}
+
+{% if form is rootform %}
+{{ form_end(form, {'render_rest': false}) }}
+{% endif %}

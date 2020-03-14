@@ -1,0 +1,31 @@
+{% if form is rootform %}
+{{ form_start(form) }}
+{% endif %}
+    
+<div class="form-group">
+    {{ form_label(form.author) }}
+    {{ form_widget(form.author, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.content) }}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control-sm', 'rows': 10}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.advert) }}
+    {{ form_widget(form.advert, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+{% if form.submit is defined %}
+<div class="form-group">
+    {{ form_widget(form.submit, {'label': 'platform.application.form.button.submit', 'attr': {'class': 'btn-sm btn-success'}}) }}
+    {% if form.back is defined %}
+    {{ form_widget(form.back, {'label': 'platform.application.form.button.back', 'attr': {'class': 'btn-sm btn-secondary'}}) }}
+    {% endif %}
+</div>
+{% endif %}
+
+{% if form is rootform %}
+{{ form_end(form, {'render_rest': false}) }}
+{% endif %}

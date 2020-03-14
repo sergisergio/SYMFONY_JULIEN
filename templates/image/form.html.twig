@@ -1,0 +1,18 @@
+{% if form is rootform %}
+{{ form_start(form) }}
+{% endif %}
+
+<div class="form-group">
+    {{ form_label(form.url) }}
+    {{ form_widget(form.url, {'attr': {'class': 'form-control-sm'}}) }}
+    {{ form_help(form.url, {'help': 'platform.image.form.field.url_help'}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.alt) }}
+    {{ form_widget(form.alt, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+{% if form is rootform %}
+{{ form_end(form, {'render_rest': false}) }}
+{% endif %}

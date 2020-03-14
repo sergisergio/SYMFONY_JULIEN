@@ -1,0 +1,38 @@
+{% extends 'skill/index.html.twig' %}
+
+{% block content %}
+
+    <h2>{% trans with {'%id%': app.request.get('skill_id')} %} platform.skill.show.title {% endtrans %}</h2>
+
+    <p><strong>{% trans %} platform.skill.show.label.name {% endtrans %}</strong>: {{ skill.name }}</p>
+    <p class="m-0"><strong>{% trans %} platform.skill.show.label.linked {% endtrans %}</strong>:</p>
+    {% if skill.adverts is empty %}
+        <small class="text-muted">{% trans %} platform.skill.show.result.empty {% endtrans %}</small>
+    {% else %}
+        <ul class="list-group m-0 mt-3">
+            {% for advert in skill.adverts %}
+            <li class="list-group-item">
+                <h5 class="m-0"><a href="{{ path('advert_show', {'advert_id': advert.id}) }}" target="_self">{% trans with {'%id%': advert.advert.id} %} platform.skill.show.result.advert.title {% endtrans %}</a></h5>
+                <p class="m-0"><strong>{{ advert.advert.title }}</strong></p>
+                <p class="m-0">{{ advert.advert.content|slice(0,100) }} ...</p>
+                <p class="m-0 text-muted"><small>{{ advert.advert.author }}</small></p>
+                <hr class="my-2">
+                <p class="m-0"><span class="badge badge-dark badge-pill mr-3">{% trans %} platform.skill.show.result.badge.level {% endtrans %}</span> 
+                {% for i in 0..4 %}
+                    {% if advert.level > i %}
+                    <i class="fas fa-star" style="color:green;"></i>
+                    {% else %}
+                    <i class="far fa-star" style="color:grey;"></i>
+                    {% endif %}
+                {% endfor %}
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p class="my-3">
+        <button type="button" class="btn btn-sm btn-secondary" onclick="javascript:window.open('{{ path('skill_list') }}','_self');">{% trans %} platform.skill.show.button.back {% endtrans %}</button> 
+    </p>
+    
+{% endblock %}

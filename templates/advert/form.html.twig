@@ -1,0 +1,86 @@
+{% if form is rootform %}
+{{ form_start(form) }}
+{% endif %}
+
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+    
+<div class="form-group">
+    {{ form_label(form.author) }}
+    {{ form_widget(form.author, {'attr': {'class': 'form-control-sm'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.content) }}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control-sm', 'rows': 10}}) }}
+</div>
+
+{{ include('image/form.html.twig', {'form': form.image}) }}
+
+<fieldset class="form-group">
+    {{ form_label(form.skills) }}
+    <div class="list-group" id="advert_skills" data-prototype="{% filter escape('html_attr') %} {{ include('advert_skill/form.html.twig', {'form': form.skills.vars.prototype, 'vars': 'prototype'}) }} {% endfilter %}">
+        {% for skill in form.skills %}
+        <div class="list-group-item list-group-item-secondary">
+            {{ include('advert_skill/form.html.twig', {'form': skill}) }}
+        </div>
+        {% endfor %}
+    </div>
+</fieldset>
+
+<div class="form-group">
+    {{ form_label(form.published) }}
+    {{ form_widget(form.published) }}
+</div>
+
+{% if form.submit is defined %}
+<div class="form-group">
+    {{ form_widget(form.submit, {'label': 'platform.advert.form.button.submit', 'attr': {'class': 'btn-sm btn-success'}}) }}
+    {% if form.back is defined %}
+    {{ form_widget(form.back, {'label': 'platform.advert.form.button.back', 'attr': {'class': 'btn-sm btn-secondary'}}) }}
+    {% endif %}
+</div>
+{% endif %}
+
+{% if form is rootform %}
+{{ form_end(form, {'render_rest': false}) }}
+{% endif %}
+
+{% block javascript %}
+<script src="/libs/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+var $collectionHolder;
+var $addSkillButton = $('<button type="button" class="add_skill_link btn btn-sm btn-dark">{% trans %} platform.advert.form.button.skills.add {% endtrans %}</button>');
+var $newLinkLi = $('<div class="list-group-item list-group-item-secondary"></div>').append($addSkillButton);
+jQuery(document).ready(function() {
+    $collectionHolder = $('#advert_skills');
+    $collectionHolder.find('.list-group-item').each(function() {
+        addSkillFormDeleteLink($(this));
+    });
+    $collectionHolder.append($newLinkLi);
+    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+    $addSkillButton.on('click', function(e) {
+        addSkillForm($collectionHolder, $newLinkLi);
+    });
+});
+function addSkillForm($collectionHolder, $newLinkLi) {
+    var prototype = $collectionHolder.data('prototype');
+    var index = $collectionHolder.data('index');
+    var newForm = prototype;
+        newForm = newForm.replace(/__name__/g, index);
+    $collectionHolder.data('index', index + 1);
+    var $newFormLi = $('<div class="list-group-item list-group-item-secondary"></div>').append(newForm);
+    $newLinkLi.before($newFormLi);
+    addSkillFormDeleteLink($newFormLi);
+}
+function addSkillFormDeleteLink($tagFormLi) {
+    var $removeFormButton = $('<button type="button" class="btn btn-sm btn-danger">{% trans %} platform.advert.form.button.skills.remove {% endtrans %}</button>');
+    $tagFormLi.append($removeFormButton);
+    $removeFormButton.on('click', function(e) {
+        $tagFormLi.remove();
+    });
+}
+</script>
+{% endblock %}

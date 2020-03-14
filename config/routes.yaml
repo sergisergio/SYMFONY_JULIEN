@@ -1,0 +1,41 @@
+index:
+  path: /
+  controller: App\Controller\DefaultController::index
+
+reponse:
+  path: /reponse
+  controller: App\Controller\DefaultController::reponse
+
+dump:
+  path: /dump
+  controller: App\Controller\DefaultController::dump
+
+identity:
+  path: /{firstname}/{lastname}/{age}
+  controller: App\Controller\IdentityController::reference
+
+forum:
+  path: /forum/{year}/{month}/{id}/{slug}.{_format}
+  controller: App\Controller\IdentityController::forum
+  defaults:
+    _format: html
+  requirements:
+    year:  '\d+'
+    month: '\d+'
+    id:    '\d+'
+    slug:  '[a-zA-Z1-9\-]+'
+    _format: html|json|xml
+
+
+# Security
+
+# login:
+#   path: /login
+#   defaults:
+#     _controller: App:Security:login
+
+# login_check:
+#   path: /login_check
+
+# logout:
+#   path: /logout
